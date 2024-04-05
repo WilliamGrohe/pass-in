@@ -1,3 +1,5 @@
+import { ChangeEvent, useState } from "react";
+
 import {
   ChevronLeft,
   ChevronRight,
@@ -6,12 +8,21 @@ import {
   MoreHorizontal,
   Search,
 } from "lucide-react";
+
 import { IconButton } from "./icon-button";
 import { Table } from "./table/table";
 import { TableHeader } from "./table/table-header";
 import { TableCell } from "./table/table-cell";
+import { attendees } from "../data/attendees";
+
 
 export function AttendeeList() {
+  const [search, setSearch] = useState('')
+
+  function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
+    setSearch(event.target.value)
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-3 items-center">
@@ -20,11 +31,13 @@ export function AttendeeList() {
         <div className="px-3 w-72 py-1.5 border border-white/10 rounded-lg flex items-center gap-3">
           <Search className="size-4 text-emerald-300" />
           <input
+            onChange={onSearchInputChanged}
             type="text"
             className="bg-transparent flex-1 outline-none border-none p-0 text-sm cursor-pointer"
             placeholder="Buscar participante..."
           />
         </div>
+        {search}
       </div>
 
       <Table>
@@ -44,26 +57,26 @@ export function AttendeeList() {
           </tr>
         </thead>
         <tbody>
-          {Array.from({ length: 8 }).map((i, j) => {
+          {attendees.map((attendee) => {
             return (
-              <tr key={j} className="border-b border-white/10 hover:bg-white/5">
+              <tr key={attendee.id} className="border-b border-white/10 hover:bg-white/5">
                 <TableCell>
                   <input
                     className="rounded size-4 checked:accent-orange-400 bg-black/20 border border-white/10 cursor-pointer"
                     type="checkbox"
                   />
                 </TableCell>
-                <TableCell>52716</TableCell>
+                <TableCell>{attendee.id}</TableCell>
                 <TableCell>
                   <div className="flex flex-col gap-1">
                     <span className="font-semibold text-white">
-                      William Grohe
+                      {attendee.name}
                     </span>
-                    <span>william@grohe.com.br</span>
+                    <span>{attendee.email}</span>
                   </div>
                 </TableCell>
-                <TableCell>7 dias atrás</TableCell>
-                <TableCell>3 dias atrás</TableCell>
+                <TableCell>{attendee.createdAt.toISOString()}</TableCell>
+                <TableCell>{attendee.checkedInAt.toISOString()}</TableCell>
                 <TableCell>
                   <IconButton transparent>
                     <MoreHorizontal className="size-4" />
