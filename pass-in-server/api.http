@@ -13,6 +13,6 @@ POST http://localhost:3333/events/d5c009a4-f5ed-42dd-aa45-958598d8c322/attendees
 Content-Type: application/json
 
 {
-  "name": "William",
-  "email": "will@gmail.com"
+  "name": "William G",
+  "email": "willi@gmail.com"
 }
