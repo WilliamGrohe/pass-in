@@ -2,7 +2,17 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
-  "title": "NLW summit",
+  "title": "NLW summitt",
   "details": "detalhes do evento",
   "maximumAttendees": 100
+}
+
+###
+
+POST http://localhost:3333/events/d5c009a4-f5ed-42dd-aa45-958598d8c322/attendees
+Content-Type: application/json
+
+{
+  "name": "William",
+  "email": "will@gmail.com"
 }
