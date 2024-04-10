@@ -38,18 +38,27 @@ export function AttendeeList() {
 
   const totalPages = Math.ceil(total / 10)
 
+  const url = new URL('https://pass-in-rest-api.onrender.com/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees')
+
+  url.searchParams.set('pageIndex', String(page - 1))
+  
+  if ( search.length > 0 ){
+    url.searchParams.set('query', search)
+  }
+
   useEffect(() =>{
-    fetch('https://pass-in-rest-api.onrender.com/events/9e9bd979-9d10-4915-b339-3786b1634f33/attendees')
+    fetch(url)
       .then(response => response.json())
       .then(data => {
         console.log(data)
         setAttendees(data.attendees)
-        setTotal(data.attendees.length)
+        setTotal(data.total)
       })
-  }, [page])
+  }, [page, search])
 
   function onSearchInputChanged(event: ChangeEvent<HTMLInputElement>) {
     setSearch(event.target.value)
+    setPage(1)
   }
 
   function goToFirstPage(){
@@ -78,11 +87,10 @@ export function AttendeeList() {
           <input
             onChange={onSearchInputChanged}
             type="text"
-            className="bg-transparent flex-1 outline-none border-none p-0 text-sm cursor-pointer"
+            className="bg-transparent flex-1 outline-none border-none p-0 text-sm cursor-pointer focus:ring-0"
             placeholder="Buscar participante..."
           />
         </div>
-        {search}
       </div>
 
       <Table>
@@ -138,7 +146,7 @@ export function AttendeeList() {
         </tbody>
         <tfoot>
           <tr>
-            <TableCell colSpan={3}>Mostrando 10 de {total} itens</TableCell>
+            <TableCell colSpan={3}>Mostrando {attendees.length} de {total} itens</TableCell>
             <TableCell className="text-right" colSpan={3}>
               <div className="inline-flex items-center gap-8">
                 <span>Página {page} de {totalPages}</span>
