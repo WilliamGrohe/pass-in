@@ -1,5 +1,5 @@
 import logoIcon from '../assets/logo-icon.svg'
-import { NavLink } from './nav-link'
+import { NavLink } from "react-router-dom";
 
 export function Header() {
   return (
@@ -7,8 +7,8 @@ export function Header() {
       <img src={logoIcon} />
 
       <nav className='flex items-center gap-5'>
-        <NavLink href='/eventos' className='text-zinc-300'>Eventos</NavLink>
-        <NavLink href='/participantes'>Participantes</NavLink>
+        <NavLink to='/events' className='text-zinc-300'>Eventos</NavLink>
+        <NavLink to='/'>Participantes</NavLink>
       </nav>
     </div>
   )
