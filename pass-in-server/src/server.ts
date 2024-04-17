@@ -12,6 +12,7 @@ import fastifySwaggerUi from "@fastify/swagger-ui";
 import { createEvent } from "./routes/create-event";
 import { registerForEvent } from "./routes/register-for-event";
 import { getEvent } from "./routes/get-event";
+import { getAllEvents } from "./routes/get-all-events";
 import { getEventAttendees } from "./routes/get-event-attendees";
 import { getAttendeeBadge } from "./routes/get-attendee-badge";
 import { checkIn } from "./routes/check-in";
@@ -50,6 +51,7 @@ app.register(getEvent)
 app.register(getEventAttendees)
 app.register(getAttendeeBadge)
 app.register(checkIn)
+app.register(getAllEvents)
 
 app.setErrorHandler(errorHandler)
 

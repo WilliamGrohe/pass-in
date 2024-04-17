@@ -11,11 +11,12 @@ datasource db {
 }
 
 model Event {
-  id               String  @id @default(uuid())
+  id               String   @id @default(uuid())
   title            String
   details          String?
-  slug             String  @unique
-  maximumAttendees Int?    @map("maximum_attendees")
+  slug             String   @unique
+  maximumAttendees Int?     @map("maximum_attendees")
+  createdAt        DateTime @default(now()) @map("created_at")
 
   attendees Attendee[]
 

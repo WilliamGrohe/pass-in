@@ -2,9 +2,10 @@ POST http://localhost:3333/events
 Content-Type: application/json
 
 {
-  "title": 123,
-  "details": "detalhes do evento",
-  "maximumAttendees": 1
+  "title": "Evento com data",
+  "details": "detalhes do evento datado",
+  "maximumAttendees": 100,
+  "createdAt": "2024-04-01T16:41:57.865Z"
 }
 
 ###
@@ -28,3 +29,6 @@ GET http://localhost:3333/attendees/3/check-in
 
 ###
 GET http://localhost:3333/events/9f1938c0-a954-44af-b7a3-51e7e4b94f0c/attendees?query=will
+
+###
+GET http://localhost:3333/events
